@@ -1,14 +1,11 @@
 FROM python:2.7
 
-COPY . /telomerecat
-
-WORKDIR /tmp
-
-# Python 
-RUN pip install telomerecat && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /root/.cache/pip && \
-    rm -rf /tmp/*
+# Python
+RUN pip install pandas argparse numpy parabam && \
+    git clone https://github.com/jhrf/telomerecat.git && \
+    cd /telomerecat && \
+    python setup.py install && \
+    rm -rf /root/.cache/pip
 
 WORKDIR /telomerecat
 
